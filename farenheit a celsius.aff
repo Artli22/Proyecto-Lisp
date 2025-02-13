@@ -1,0 +1,9 @@
+
+(defun fahrenheit-a-celsius (f)
+  "Convierte grados Fahrenheit a Celsius."
+  (/ (* (- f 32) 5) 9))
+
+(format t "Ingrese la temperatura en Fahrenheit: ")
+(let ((temp (parse-integer (read-line))))
+  (format t "La temperatura en Celsius es: ~,2F~%" (fahrenheit-a-celsius temp)))
+
