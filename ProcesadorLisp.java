@@ -2,17 +2,17 @@ import java.util.*;
 
 public class ProcesadorLisp {
 
-    
+    // Posibles estados 
     enum Estado {
         INICIO, NUMERO, IDENTIFICADOR, CADENA, OPERADOR, TERMINADO
     }
 
-    
+    // Metodo para eliminar espacios en blanco
     public static String cleanInput(String input) {
         return input.replaceAll("\\s+", " ").trim();
     }
 
-    
+    // Metodo para verificar el numero de parentesis de la expresion
     public static boolean isBalanced(String input) {
         Stack<Character> stack = new Stack<>();
 
@@ -30,7 +30,7 @@ public class ProcesadorLisp {
         return stack.isEmpty(); 
     }
 
-    
+    // Metodo para organizar los tokens 
     public List<Token> tokenizar(String expresion) {
         if (!isBalanced(expresion)) {
             throw new IllegalArgumentException("La expresión tiene un desbalance en los paréntesis");
@@ -41,7 +41,7 @@ public class ProcesadorLisp {
         Estado estado = Estado.INICIO;  
         StringBuilder buffer = new StringBuilder();
         char[] caracteres = expresion.toCharArray();
-
+        // Clasificacion del tipo de tokens 
         for (char c : caracteres) {
             switch (estado) {
                 case INICIO -> {
@@ -105,7 +105,7 @@ public class ProcesadorLisp {
                 }
             }
         }
-
+        
         if (buffer.length() > 0) {
             tokens.add(new Token(TiposTokens.Identificador, buffer.toString()));
         }
